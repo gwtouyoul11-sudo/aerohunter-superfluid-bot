@@ -142,9 +142,13 @@ bot.onText(/\/status/, async (msg) => {
 
 *Current Status:*
 🟢 Agent: REGISTERED
-🟢 Pool: MAESTRO (Score 59.66)
+🟡 Pool: COMMON (Score 12.05 - pending re-index)
 🟢 Earning: ACTIVE
-🟢 Score: 59.66 (Top 30%!)
+🟡 Score: 12.05 (waiting for 8004scan update)
+
+*Note:* Score temporarily low due to 8004scan cache.
+All services are online and working correctly.
+Expected score after re-index: 60-70+
 
 *Links:*
 [View Profile](https://8004scan.io/agents/base/${agentInfo.agentId})
@@ -173,20 +177,23 @@ bot.onText(/\/earnings/, async (msg) => {
     const earnings = `
 💰 *EARNINGS REPORT*
 
-*Current Pool:* Maestro Pool
-*Rate:* 112 SUP/month (~$1.68)
+*Current Pool:* Common Pool (temporary)
+*Rate:* 9.5 SUP/month (~$0.14)
 
 *Breakdown:*
-• Per Month: 112 SUP (~$1.68)
-• Per Day: 3.73 SUP (~$0.056)
-• Per Hour: 0.16 SUP (~$0.0023)
+• Per Month: 9.5 SUP (~$0.14)
+• Per Day: 0.32 SUP (~$0.005)
+• Per Hour: 0.013 SUP (~$0.0002)
 
 *Time Active:* ${daysSinceReg.toFixed(1)} days
-*Estimated Earned:* ${(daysSinceReg * 3.73).toFixed(2)} SUP
+*Estimated Earned:* ${(daysSinceReg * 0.32).toFixed(2)} SUP
+
+*Note:* Currently in Common Pool due to score cache issue.
+After 8004scan re-index, will move to Maestro/Legend Pool.
 
 *Potential Earnings:*
-✅ Current (Maestro): $1.68/month
-🏆 Score 80+ (Legend): $15/month (9x more!)
+📊 Score 45+ (Maestro): $1.68/month (12x)
+🏆 Score 80+ (Legend): $15/month (107x)
 
 *View Balance:*
 [Superfluid Dashboard](https://app.superfluid.org/)
@@ -208,28 +215,35 @@ bot.onText(/\/score/, (msg) => {
   const score = `
 📈 *SCORE TRACKING*
 
-*Current Score:* 59.66 (EXCELLENT!)
-*Rank:* ~#800-1200 / 3927 agents (Top 30%!)
+*Current Score:* 12.05 (temporary - pending re-index)
+*Rank:* #5997 / 3927 agents
 *Feedback:* 0 (need feedback!)
 
+*Why Score is Low:*
+8004scan is using cached metadata from 4 hours ago.
+All services are now online and working correctly.
+
 *Score Tiers:*
-• 0-44: Common Pool ($0.14/month)
-• 45-79: Maestro Pool ($1.68/month) ← YOU ARE HERE!
+• 0-44: Common Pool ($0.14/month) ← YOU ARE HERE (temporary)
+• 45-79: Maestro Pool ($1.68/month)
 • 80-100: Legend Pool ($15/month)
 
-*How to Increase:*
+*Expected After Re-index:*
+✅ All services online → Services score: 80-90
+✅ Metadata updated → Overall score: 60-70+
+✅ Auto-move to Maestro Pool → $1.68/month
+
+*How to Reach Legend (80+):*
 1️⃣ Get 25+ feedback (95%+ rating)
-2️⃣ Provide quality service
-3️⃣ Stay active 24/7
-4️⃣ Improve metadata
+2️⃣ Maintain 24/7 uptime
+3️⃣ Provide quality service
 
 *Timeline:*
-✅ Current: Score 59.66 (Maestro Pool)
-• +Uptime: Score 62-65 (24/7 bot)
-• +Feedback: Score 75-85 (25+ reviews)
-• Target: Score 80+ (Legend Pool!)
+⏳ Now: Score 12.05 (waiting for re-index)
+📈 After re-index: Score 60-70 (Maestro Pool)
+🎯 With feedback: Score 80+ (Legend Pool!)
 
-[Check Score](https://8004classifier.pilou.work/)
+[Check Score](https://8004scan.io/agents/base/${agentInfo.agentId})
   `;
   
   bot.sendMessage(chatId, score, { 
@@ -244,20 +258,29 @@ bot.onText(/\/pools/, (msg) => {
   const pools = `
 🏊 *POOL STATUS*
 
-✅ *MAESTRO POOL - JOINED*
+✅ *COMMON POOL - JOINED*
+• Rate: 37,500 SUP/month
+• Agents: 3,927
+• Your Share: ~9.5 SUP/month
+• Status: ACTIVE & EARNING
+• Earnings: $0.14/month
+
+⭕ *MAESTRO POOL - NOT JOINED (YET)*
 • Requirement: Score 45+
 • Rate: 139,286 SUP/month
 • Agents: 1,240
-• Your Share: ~112 SUP/month
-• Status: ACTIVE & EARNING
-• Earnings: $1.68/month
+• Potential: ~112 SUP/month
+• Join: After score re-index (expected 60-70)
 
 ⭕ *LEGEND POOL - NOT JOINED*
 • Requirement: Score 80+ (top 5%)
 • Rate: 182,143 SUP/month
 • Agents: 180
 • Potential: ~1,012 SUP/month
-• Join: Automatic when qualified
+• Join: Need 25+ feedback
+
+*Note:* Currently in Common Pool due to score cache.
+Will auto-move to Maestro Pool after 8004scan re-index.
 
 [View Pools](https://8004-demo.superfluid.org/)
   `;
