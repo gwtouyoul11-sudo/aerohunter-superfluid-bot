@@ -20,7 +20,7 @@ import { readFileSync } from 'fs';
 
 dotenv.config();
 
-console.log('🤖 Telegram Superfluid Monitor Bot');
+console.log('🤖 Telegram Superfluid Monitor Bot v1.0.1');
 console.log('===================================\n');
 
 // Config
