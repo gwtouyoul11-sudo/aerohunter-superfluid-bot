@@ -51,10 +51,35 @@ if (!TELEGRAM_CHAT_ID) {
 let agentInfo;
 try {
   agentInfo = JSON.parse(readFileSync('agent-registration.json', 'utf8'));
-} catch {
-  console.log('❌ agent-registration.json not found\n');
-  console.log('Run: node full-auto-register.js\n');
-  process.exit(1);
+  console.log('✅ Loaded agent info from file\n');
+} catch (error) {
+  console.log('⚠️  agent-registration.json not found, using env variables...\n');
+  
+  // Fallback to environment variables
+  if (process.env.AGENT_ID && process.env.WALLET_ADDRESS) {
+    agentInfo = {
+      agentId: process.env.AGENT_ID,
+      owner: process.env.WALLET_ADDRESS,
+      agentURI: process.env.AGENT_URI || 'ipfs://QmbPVN74hTXEJYLC6Bhj7ZZoyzQzRKtWT3KWY6JgVPUKiU',
+      registeredAt: '2026-03-26T06:41:15Z',
+      network: 'base',
+      registry: '0x8004A169FB4a3325136EB29fA0ceB6D2e539a432',
+      links: {
+        '8004scan': `https://8004scan.io/agents/base/${process.env.AGENT_ID}`,
+        'superfluid': 'https://8004-demo.superfluid.org/',
+        'dashboard': 'https://app.superfluid.org/'
+      }
+    };
+    console.log('✅ Loaded agent info from environment\n');
+  } else {
+    console.log('❌ No agent info found!\n');
+    console.log('Add to Railway environment variables:');
+    console.log('  AGENT_ID=37153');
+    console.log('  WALLET_ADDRESS=0x9bd1Eb3B0d2dCB671AC3DC582edfaa8e8f4c7F75');
+    console.log('  AGENT_URI=ipfs://QmbPVN74hTXEJYLC6Bhj7ZZoyzQzRKtWT3KWY6JgVPUKiU\n');
+    console.log('Or upload agent-registration.json file\n');
+    process.exit(1);
+  }
 }
 
 // Create bot
@@ -117,9 +142,9 @@ bot.onText(/\/status/, async (msg) => {
 
 *Current Status:*
 🟢 Agent: REGISTERED
-🟢 Pool: JOINED (Common)
+🟢 Pool: MAESTRO (Score 59.66)
 🟢 Earning: ACTIVE
-🟡 Score: ~20-30 (new agent)
+🟢 Score: 59.66 (Top 30%!)
 
 *Links:*
 [View Profile](https://8004scan.io/agents/base/${agentInfo.agentId})
@@ -148,20 +173,20 @@ bot.onText(/\/earnings/, async (msg) => {
     const earnings = `
 💰 *EARNINGS REPORT*
 
-*Current Pool:* Common Pool
-*Rate:* 9.5 SUP/month (~$0.14)
+*Current Pool:* Maestro Pool
+*Rate:* 112 SUP/month (~$1.68)
 
 *Breakdown:*
-• Per Month: 9.5 SUP (~$0.14)
-• Per Day: 0.32 SUP (~$0.005)
-• Per Hour: 0.013 SUP (~$0.0002)
+• Per Month: 112 SUP (~$1.68)
+• Per Day: 3.73 SUP (~$0.056)
+• Per Hour: 0.16 SUP (~$0.0023)
 
 *Time Active:* ${daysSinceReg.toFixed(1)} days
-*Estimated Earned:* ${(daysSinceReg * 0.32).toFixed(2)} SUP
+*Estimated Earned:* ${(daysSinceReg * 3.73).toFixed(2)} SUP
 
 *Potential Earnings:*
-📊 Score 45+ (Maestro): $1.68/month (10x)
-🏆 Score 80+ (Legend): $15/month (100x)
+✅ Current (Maestro): $1.68/month
+🏆 Score 80+ (Legend): $15/month (9x more!)
 
 *View Balance:*
 [Superfluid Dashboard](https://app.superfluid.org/)
@@ -183,13 +208,13 @@ bot.onText(/\/score/, (msg) => {
   const score = `
 📈 *SCORE TRACKING*
 
-*Current Score:* ~20-30 (estimated)
-*Rank:* #2235 / 3927 agents
+*Current Score:* 59.66 (EXCELLENT!)
+*Rank:* ~#800-1200 / 3927 agents (Top 30%!)
 *Feedback:* 0 (need feedback!)
 
 *Score Tiers:*
 • 0-44: Common Pool ($0.14/month)
-• 45-79: Maestro Pool ($1.68/month)
+• 45-79: Maestro Pool ($1.68/month) ← YOU ARE HERE!
 • 80-100: Legend Pool ($15/month)
 
 *How to Increase:*
@@ -199,9 +224,10 @@ bot.onText(/\/score/, (msg) => {
 4️⃣ Improve metadata
 
 *Timeline:*
-• Month 1: Score 30-40
-• Month 2: Score 45-55 (Maestro)
-• Month 3-6: Score 70-80+ (Legend)
+✅ Current: Score 59.66 (Maestro Pool)
+• +Uptime: Score 62-65 (24/7 bot)
+• +Feedback: Score 75-85 (25+ reviews)
+• Target: Score 80+ (Legend Pool!)
 
 [Check Score](https://8004classifier.pilou.work/)
   `;
@@ -218,18 +244,13 @@ bot.onText(/\/pools/, (msg) => {
   const pools = `
 🏊 *POOL STATUS*
 
-✅ *COMMON POOL - JOINED*
-• Rate: 37,500 SUP/month
-• Agents: 3,927
-• Your Share: ~9.5 SUP/month
-• Status: ACTIVE & EARNING
-
-⭕ *MAESTRO POOL - NOT JOINED*
+✅ *MAESTRO POOL - JOINED*
 • Requirement: Score 45+
 • Rate: 139,286 SUP/month
 • Agents: 1,240
-• Potential: ~112 SUP/month
-• Join: Need score 45+
+• Your Share: ~112 SUP/month
+• Status: ACTIVE & EARNING
+• Earnings: $1.68/month
 
 ⭕ *LEGEND POOL - NOT JOINED*
 • Requirement: Score 80+ (top 5%)
