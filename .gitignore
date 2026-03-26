@@ -2,7 +2,7 @@
 .env
 .env.local
 *.key
-agent-registration.json
+# agent-registration.json - OK to commit (no private keys)
 
 # Dependencies
 node_modules/

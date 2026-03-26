@@ -1,0 +1,18 @@
+{
+  "agentId": "37153",
+  "owner": "0x9bd1Eb3B0d2dCB671AC3DC582edfaa8e8f4c7F75",
+  "agentURI": "ipfs://QmYL1D3k1EX29oibpj5fzDmjeKw2NfYY6v8mNfX6tVDj6c",
+  "txHash": "0xc2444ebed601a5149fec6fe0353d4341554e3bda9c4d636f7c5c9d49486102a4",
+  "registeredAt": "2026-03-26T06:41:15Z",
+  "network": "base",
+  "registry": "0x8004A169FB4a3325136EB29fA0ceB6D2e539a432",
+  "gasCost": "$0.002",
+  "links": {
+    "8004scan": "https://8004scan.io/agents/base/37153",
+    "classifier": "https://8004classifier.pilou.work/",
+    "transaction": "https://basescan.org/tx/0xc2444ebed601a5149fec6fe0353d4341554e3bda9c4d636f7c5c9d49486102a4",
+    "nft": "https://basescan.org/nft/0x8004a169fb4a3325136eb29fa0ceb6d2e539a432/37153",
+    "superfluid": "https://8004-demo.superfluid.org/",
+    "dashboard": "https://app.superfluid.org/"
+  }
+}
