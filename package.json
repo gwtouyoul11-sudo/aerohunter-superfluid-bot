@@ -1,6 +1,6 @@
 {
   "name": "aerohunter-superfluid-bot",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Telegram bot for monitoring Superfluid earnings",
   "main": "bot.js",
   "type": "module",
@@ -10,6 +10,7 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "ethers": "^6.16.0",
+    "groq-sdk": "^1.1.2",
     "node-telegram-bot-api": "^0.66.0"
   },
   "engines": {
